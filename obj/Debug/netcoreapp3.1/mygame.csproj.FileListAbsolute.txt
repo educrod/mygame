@@ -1,0 +1,3 @@
+/Users/eduardo/github/mygame/obj/Debug/netcoreapp3.1/mygame.csprojAssemblyReference.cache
+/Users/eduardo/github/mygame/obj/Debug/netcoreapp3.1/mygame.AssemblyInfoInputs.cache
+/Users/eduardo/github/mygame/obj/Debug/netcoreapp3.1/mygame.AssemblyInfo.cs
