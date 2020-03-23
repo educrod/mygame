@@ -38,15 +38,15 @@
           "dependencies": {
             "MonoGame.Content.Builder": {
               "target": "Package",
-              "version": "[3.7.0.9, )"
+              "version": "[3.7.*, )"
             },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
-              "version": "[3.7.1.189, )"
+              "version": "[3.7.*, )"
             },
             "MonoGame.Framework.DesktopGL.Core": {
               "target": "Package",
-              "version": "[3.8.0.2, )"
+              "version": "[3.8.*, )"
             }
           },
           "imports": [

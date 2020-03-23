@@ -9,17 +9,25 @@ namespace mygame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        Texture2D ship_Sprite;
+        Texture2D asteroid_Sprite;
+        Texture2D space_Sprite;
+
+        SpriteFont gameFont;
+        SpriteFont timerFont;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
         }
 
         protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
+        {           
             base.Initialize();
         }
 
@@ -27,16 +35,18 @@ namespace mygame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            ship_Sprite = Content.Load<Texture2D>("ship");
+            asteroid_Sprite = Content.Load<Texture2D>("asteroid");
+            space_Sprite = Content.Load<Texture2D>("space");
+
+            gameFont = Content.Load<SpriteFont>("spaceFont");
+            timerFont = Content.Load<SpriteFont>("timerFont");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
+                Exit();            
             base.Update(gameTime);
         }
 
@@ -44,8 +54,11 @@ namespace mygame
         {
             GraphicsDevice.Clear(Color.DarkOliveGreen);
 
-            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
 
+            _spriteBatch.Draw(space_Sprite, new Vector2(0, 0), Color.White);
+
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }

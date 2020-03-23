@@ -19,3 +19,8 @@
 /Users/eduardo/github/mygame/obj/Debug/netcoreapp3.0/mygame.csproj.CopyComplete
 /Users/eduardo/github/mygame/obj/Debug/netcoreapp3.0/mygame.dll
 /Users/eduardo/github/mygame/obj/Debug/netcoreapp3.0/mygame.pdb
+/Users/eduardo/github/mygame/bin/Debug/netcoreapp3.0/Content/ship.xnb
+/Users/eduardo/github/mygame/bin/Debug/netcoreapp3.0/Content/space.xnb
+/Users/eduardo/github/mygame/bin/Debug/netcoreapp3.0/Content/timerFont.xnb
+/Users/eduardo/github/mygame/bin/Debug/netcoreapp3.0/Content/spaceFont.xnb
+/Users/eduardo/github/mygame/bin/Debug/netcoreapp3.0/Content/asteroid.xnb
