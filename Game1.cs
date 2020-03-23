@@ -57,6 +57,7 @@ namespace mygame
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(space_Sprite, new Vector2(0, 0), Color.White);
+            _spriteBatch.Draw(ship_Sprite, new Vector2(0,0), Color.White);
 
             _spriteBatch.End();
             base.Draw(gameTime);
