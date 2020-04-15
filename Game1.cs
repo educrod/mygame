@@ -16,6 +16,14 @@ namespace mygame
         SpriteFont gameFont;
         SpriteFont timerFont;
 
+        Ship player = new Ship();
+
+        Controller gameController = new Controller();
+
+        double m_iElapsedMilliseconds = 0; 
+        int m_iFrameCount = 0;
+        int m_iFPS = 0;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -45,20 +53,41 @@ namespace mygame
 
         protected override void Update(GameTime gameTime)
         {
+            m_iElapsedMilliseconds += gameTime.ElapsedGameTime.TotalMilliseconds;
+           
+            if (m_iElapsedMilliseconds > 1000)
+            {
+                m_iElapsedMilliseconds -= 1000;
+                m_iFPS = m_iFrameCount;
+                m_iFrameCount = 0;
+            }
+           
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();            
+            player.shipUpdate(gameTime);     
+            gameController.conUpdate(gameTime);      
+            for (int i = 0; i < gameController.asteroids.Count; i++)
+            {
+                gameController.asteroids[i].asteroidUpdate(gameTime);
+            }
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkOliveGreen);
-
+            m_iFrameCount++;
             _spriteBatch.Begin();
-
+            float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _spriteBatch.Draw(space_Sprite, new Vector2(0, 0), Color.White);
-            _spriteBatch.Draw(ship_Sprite, new Vector2(0,0), Color.White);
-
+            _spriteBatch.Draw(ship_Sprite, new Vector2(player.position.X - 34, player.position.Y - 50), Color.White); 
+            for (int i = 0; i < gameController.asteroids.Count; i++)
+            {
+                Vector2 tempPos = gameController.asteroids[i].position;
+                int tempRadius = gameController.asteroids[i].radius;
+                _spriteBatch.Draw(asteroid_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
+            }
+            _spriteBatch.DrawString(gameFont, "Frame Rate: " + m_iFPS.ToString() +" fps", new Vector2(10,10), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
