@@ -64,7 +64,7 @@ namespace mygame
            
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();            
-            player.shipUpdate(gameTime);     
+            player.shipUpdate(gameTime, gameController);     
             gameController.conUpdate(gameTime);      
             for (int i = 0; i < gameController.asteroids.Count; i++)
             {
@@ -81,6 +81,12 @@ namespace mygame
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
             _spriteBatch.Draw(space_Sprite, new Vector2(0, 0), Color.White);
             _spriteBatch.Draw(ship_Sprite, new Vector2(player.position.X - 34, player.position.Y - 50), Color.White); 
+            if (gameController.inGame == false)
+            {
+                string menuMessage = "Press Enter to Begin!";
+                Vector2 sizeOfText = gameFont.MeasureString(menuMessage);
+                _spriteBatch.DrawString(gameFont, menuMessage, new Vector2(640 - sizeOfText.X/2, 200), Color.White);
+            }
             for (int i = 0; i < gameController.asteroids.Count; i++)
             {
                 Vector2 tempPos = gameController.asteroids[i].position;
