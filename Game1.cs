@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using System;
 namespace mygame
 {
     public class Game1 : Game
@@ -69,7 +69,28 @@ namespace mygame
             for (int i = 0; i < gameController.asteroids.Count; i++)
             {
                 gameController.asteroids[i].asteroidUpdate(gameTime);
+
+                if (gameController.asteroids[i].position.X < (0 - gameController.asteroids[i].radius))
+                {
+                    gameController.asteroids[i].offscreen = true;
+                }
+
+                int sum = gameController.asteroids[i].radius + 30;
+                if (Vector2.Distance(gameController.asteroids[i].position, player.position) < sum)
+                {
+                    player.lifeBar --;
+                    if (player.lifeBar <= 0)
+                    {
+                        gameController.inGame = false;
+                        player.position = Ship.defaultPosition;
+                        player.lifeBar = Ship.defaultLifeBar;
+                        i = gameController.asteroids.Count;
+                        gameController.asteroids.Clear();
+                    }
+                    
+                }
             }
+            gameController.asteroids.RemoveAll(a => a.offscreen);
             base.Update(gameTime);
         }
 
@@ -93,7 +114,9 @@ namespace mygame
                 int tempRadius = gameController.asteroids[i].radius;
                 _spriteBatch.Draw(asteroid_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
             }
-            _spriteBatch.DrawString(gameFont, "Frame Rate: " + m_iFPS.ToString() +" fps", new Vector2(10,10), Color.White);
+            //_spriteBatch.DrawString(gameFont, "Frame Rate: " + m_iFPS.ToString() +" fps", new Vector2(10,10), Color.White);
+            _spriteBatch.DrawString(timerFont, "Time:" + Math.Floor(gameController.totalTime).ToString(), new Vector2(3,3), Color.White); 
+            _spriteBatch.DrawString(gameFont, "Life: " + player.lifeBar.ToString(), new Vector2(1050,650), Color.White);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
